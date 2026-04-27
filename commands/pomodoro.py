@@ -6,6 +6,10 @@ class Pomodoro(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    async def ping(self, ctx):
+        await ctx.send("Pong!")
+
+    @commands.command()
     async def pomodoro(self, ctx, *args):
         if len(args) != 2:
             await ctx.send("Assim não funciona. Tenta colocar o periodo de estudo e descanso")
@@ -27,3 +31,6 @@ class Pomodoro(commands.Cog):
         await ctx.send(f"Foco acabou")
         await asyncio.sleep(breaks*60)
         await ctx.send(f"Descanso acabou")
+
+async def setup(bot):
+    await bot.add_cog(Pomodoro(bot))
