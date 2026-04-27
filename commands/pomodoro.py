@@ -32,5 +32,13 @@ class Pomodoro(commands.Cog):
         await asyncio.sleep(breaks*60)
         await ctx.send(f"Descanso acabou")
 
+    @commands.command()
+    async def check_voice(self, ctx):
+        author = ctx.author.voice
+        if author == None:
+            await ctx.send("Não esta no voice")
+        else:
+            await ctx.send(ctx.author.voice.channel)
+
 async def setup(bot):
     await bot.add_cog(Pomodoro(bot))
