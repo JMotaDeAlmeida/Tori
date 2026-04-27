@@ -34,11 +34,17 @@ class Pomodoro(commands.Cog):
 
     @commands.command()
     async def check_voice(self, ctx):
-        author = ctx.author.voice
-        if author == None:
+        channel = await self._get_voice_channel(ctx)
+        if channel == None:
             await ctx.send("Não esta no voice")
         else:
-            await ctx.send(ctx.author.voice.channel)
+            await ctx.send(f"Você está no canal {channel}")
 
+
+    async def _get_voice_channel(self, ctx):
+        voice = ctx.author.voice
+        return voice.channel if voice else None
+
+    
 async def setup(bot):
     await bot.add_cog(Pomodoro(bot))
